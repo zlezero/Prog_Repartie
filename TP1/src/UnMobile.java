@@ -1,10 +1,13 @@
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 class UnMobile extends JPanel implements Runnable
 {
     int saLargeur, saHauteur, sonDebDessin;
-    final int sonPas = 10, sonTemps=50, sonCote=40;
+    final int sonPas = 10, sonTemps=50, sonCote=40;    
     
     UnMobile(int telleLargeur, int telleHauteur)
     {
@@ -54,4 +57,5 @@ class UnMobile extends JPanel implements Runnable
     	super.paintComponent(telCG);
     	telCG.fillRect(sonDebDessin, saHauteur/2, sonCote, sonCote);
     }
+
 }
