@@ -19,16 +19,13 @@ public class Affichage extends Thread {
 	public void run() {
 		
 		sem.syncWait();
-		System.out.println("J'entre en section critique");
 		
 		for (int i=0; i<texte.length(); i++) {
-			System.out.print(texte.charAt(i));
+			System.out.println(texte.charAt(i));
 			try {sleep(100);} catch(InterruptedException e){};
 		}
 		
-		System.out.println("Je sors de section critique");
 		sem.syncSignal();
-		
 
 	}
 }
