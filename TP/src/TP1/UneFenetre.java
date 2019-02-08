@@ -8,7 +8,7 @@ import javax.swing.*;
 
 class UneFenetre extends JFrame
 {
-    private final int LARG=900, HAUT=100, NBRLIG = 6, NBRCOL = 2;
+    private final int LARG=1000, HAUT=100, NBRLIG = 15, NBRCOL = 1;
     
     //JButton boutons[] = new JButton[NBRLIG];
     UnMobile mobiles[] = new UnMobile[NBRLIG];

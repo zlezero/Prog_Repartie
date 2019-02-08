@@ -72,7 +72,9 @@ class UnMobile extends JPanel implements Runnable
     			    }
     		}
     		
-    		/* for (sonDebDessin = saLargeur; sonDebDessin > 0; sonDebDessin-= sonPas)
+    		//Retour
+    		
+    		for (sonDebDessin = saLargeur; sonDebDessin > (0.67 * saLargeur) + sonPas; sonDebDessin-= sonPas)
     		{
     				repaint();
     				
@@ -83,8 +85,41 @@ class UnMobile extends JPanel implements Runnable
     			    {
     					telleExcp.printStackTrace();
     			    }
-    		} */
+    		}
     		
+    		sem.syncWait();
+    		
+    		couleurRect = Color.red;
+    		
+    		for (; sonDebDessin > (0.33 * saLargeur) + sonPas; sonDebDessin-= sonPas)
+    		{
+    				repaint();
+    				
+    				try {
+    					Thread.sleep(sonTemps);
+    				}
+    				catch (InterruptedException telleExcp)
+    			    {
+    					telleExcp.printStackTrace();
+    			    }
+    		}
+    		
+    		couleurRect = Color.black;
+
+    		sem.syncSignal();
+    		
+    		for (; sonDebDessin > 0; sonDebDessin-= sonPas)
+    		{
+    				repaint();
+    				
+    				try {
+    					Thread.sleep(sonTemps);
+    				}
+    				catch (InterruptedException telleExcp)
+    			    {
+    					telleExcp.printStackTrace();
+    			    }
+    		}
     	}
 
 		
