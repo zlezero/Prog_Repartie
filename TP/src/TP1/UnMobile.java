@@ -10,6 +10,8 @@ class UnMobile extends JPanel implements Runnable
 {
     int saLargeur, saHauteur, sonDebDessin;
     final int sonPas = 10, sonTemps=50, sonCote=40;    
+    static semaphoreGeneral sem = new semaphoreGeneral(2);
+    Color couleurRect;
     
     UnMobile(int telleLargeur, int telleHauteur)
     {
@@ -23,7 +25,24 @@ class UnMobile extends JPanel implements Runnable
     {	
     	while (true) {
     		
-    		for (sonDebDessin=0; sonDebDessin < saLargeur - sonPas; sonDebDessin+= sonPas)
+    		for (sonDebDessin=0; sonDebDessin < (0.33 * saLargeur) - sonPas; sonDebDessin+= sonPas)
+    		{
+    				repaint();
+    				
+    				try {
+    					Thread.sleep(sonTemps);
+    				}
+    				catch (InterruptedException telleExcp)
+    			    {
+    					telleExcp.printStackTrace();
+    			    }
+    		}
+    		    		
+    		sem.syncWait();
+    		
+    		couleurRect = Color.red;
+    		
+    		for (; sonDebDessin < (0.67 * saLargeur) - sonPas; sonDebDessin+= sonPas)
     		{
     				repaint();
     				
@@ -36,7 +55,11 @@ class UnMobile extends JPanel implements Runnable
     			    }
     		}
     		
-    		for (sonDebDessin = saLargeur; sonDebDessin > 0; sonDebDessin-= sonPas)
+    		couleurRect = Color.black;
+
+    		sem.syncSignal();
+    		
+    		for (; sonDebDessin < saLargeur - sonPas; sonDebDessin+= sonPas)
     		{
     				repaint();
     				
@@ -49,6 +72,54 @@ class UnMobile extends JPanel implements Runnable
     			    }
     		}
     		
+    		//Retour
+    		
+    		for (sonDebDessin = saLargeur; sonDebDessin > (0.67 * saLargeur) + sonPas; sonDebDessin-= sonPas)
+    		{
+    				repaint();
+    				
+    				try {
+    					Thread.sleep(sonTemps);
+    				}
+    				catch (InterruptedException telleExcp)
+    			    {
+    					telleExcp.printStackTrace();
+    			    }
+    		}
+    		
+    		sem.syncWait();
+    		
+    		couleurRect = Color.red;
+    		
+    		for (; sonDebDessin > (0.33 * saLargeur) + sonPas; sonDebDessin-= sonPas)
+    		{
+    				repaint();
+    				
+    				try {
+    					Thread.sleep(sonTemps);
+    				}
+    				catch (InterruptedException telleExcp)
+    			    {
+    					telleExcp.printStackTrace();
+    			    }
+    		}
+    		
+    		couleurRect = Color.black;
+
+    		sem.syncSignal();
+    		
+    		for (; sonDebDessin > 0; sonDebDessin-= sonPas)
+    		{
+    				repaint();
+    				
+    				try {
+    					Thread.sleep(sonTemps);
+    				}
+    				catch (InterruptedException telleExcp)
+    			    {
+    					telleExcp.printStackTrace();
+    			    }
+    		}
     	}
 
 		
@@ -57,7 +128,11 @@ class UnMobile extends JPanel implements Runnable
     public void paintComponent(Graphics telCG)
     {
     	super.paintComponent(telCG);
+    	telCG.setColor(couleurRect);
     	telCG.fillRect(sonDebDessin, saHauteur/2, sonCote, sonCote);
+    	telCG.setColor(Color.black);
+    	telCG.drawLine((int)(0.33 * saLargeur) + sonPas, 0, (int)(0.33 * saLargeur) + sonPas, saHauteur);
+    	telCG.drawLine((int)(0.67 * saLargeur) - sonPas, 0, (int)(0.67 * saLargeur) - sonPas, saHauteur);
     }
 
 }

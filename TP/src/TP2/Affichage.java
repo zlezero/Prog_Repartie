@@ -14,18 +14,18 @@ public class Affichage extends Thread {
 	String texte; 
 
 	public Affichage (String txt){texte=txt;}
-	static Exclusion excluMut = new Exclusion();
+	static semaphoreBinaire sem = new semaphoreBinaire(1);
 
 	public void run() {
 		
-		synchronized (excluMut) {
-			
-			for (int i=0; i<texte.length(); i++) {
-			    System.out.print(texte.charAt(i));
-			    try {sleep(100);} catch(InterruptedException e){};
-			}
-
+		sem.syncWait();
+		
+		for (int i=0; i<texte.length(); i++) {
+			System.out.println(texte.charAt(i));
+			try {sleep(100);} catch(InterruptedException e){};
 		}
+		
+		sem.syncSignal();
 
 	}
 }

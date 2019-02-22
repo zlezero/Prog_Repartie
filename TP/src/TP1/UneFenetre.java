@@ -6,11 +6,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
-class UneFenetre extends JFrame implements ActionListener
+class UneFenetre extends JFrame
 {
-    private final int LARG=400, HAUT=250, NBRLIG = 6, NBRCOL = 2;
+    private final int LARG=1000, HAUT=100, NBRLIG = 18, NBRCOL = 1;
     
-    JButton boutons[] = new JButton[NBRLIG];
+    //JButton boutons[] = new JButton[NBRLIG];
     UnMobile mobiles[] = new UnMobile[NBRLIG];
     Thread threads[] = new Thread[NBRLIG];
     boolean statusThreads[] = new boolean[NBRLIG];
@@ -30,19 +30,19 @@ class UneFenetre extends JFrame implements ActionListener
     		mobiles[i] = new UnMobile(LARG, HAUT);
     		leConteneur.add(mobiles[i]);
     		
-    		boutons[i] = new JButton("Suspendre / Reprendre");
-    		boutons[i].addActionListener(this);
-    		leConteneur.add(boutons[i]);
+    		//boutons[i] = new JButton("Suspendre / Reprendre");
+    		//boutons[i].addActionListener(this);
+    		//leConteneur.add(boutons[i]);
     		
     		threads[i] = new Thread(mobiles[i], "run");
     		threads[i].start();
     		
-    		statusThreads[i] = true;
+    		//statusThreads[i] = true;
     	}
     	
     }
 
-	public void actionPerformed(ActionEvent arg0) {
+	/* public void actionPerformed(ActionEvent arg0) {
 				
 		for (int i = 0; i != NBRLIG; i++) {
 			
@@ -61,5 +61,5 @@ class UneFenetre extends JFrame implements ActionListener
 			
 		}
 		
-	}
+	} */
 }
