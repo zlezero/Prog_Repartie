@@ -11,16 +11,19 @@ public class Producer extends Thread {
 	}
 	
 	public void run() {
-		while (true) {
-			bal.deposer("Mon mot");
+		
+		String str = "";
+		
+		while (true) {			
+			bal.deposer(saisie());
 		}
+				
 	}
 	
 	public String saisie() {
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Entrez un mot :");
 		String str = sc.nextLine();
-		sc.close();
 		return str;
 	}
 	

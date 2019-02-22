@@ -9,9 +9,11 @@ public class Consumer extends Thread {
 	}
 	
 	public void run() {
-		while (true) {
-			bal.retirer();
+				
+		while (true) {		
+			bal.retirer();		
 		}
+				
 	}
 	
 }
