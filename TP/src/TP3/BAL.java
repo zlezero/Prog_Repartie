@@ -25,6 +25,7 @@ public class BAL {
 		if (mot.equals("Q")) {
 			Thread.currentThread().interrupt();
 		}
+		
 	}
 	
 	public synchronized void retirer() {
