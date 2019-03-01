@@ -28,9 +28,10 @@ public class Producer extends Thread {
 				System.out.println("[Producteur] La BAL est pleine !");
 			}*/
 			
-				//Thread.sleep(300);
+				Thread.sleep(1000);
 			}
 			catch (InterruptedException e) {
+				e.printStackTrace();
 				System.out.println("[Producteur] La BAL est pleine !");
 			}
 		}
@@ -52,7 +53,11 @@ public class Producer extends Thread {
 	
 	public String genererLettreOrdre() {
 		char c = (char)(numLettre + 97);
-		numLettre = (numLettre + 1) % 26;
+		numLettre = (numLettre + 1);
+		if (numLettre == 27) {
+			numLettre = 0;
+			return "*";
+		} else { numLettre = numLettre % 27; }
 		return String.valueOf(c);
 	}
 	
